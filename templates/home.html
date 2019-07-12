@@ -1,0 +1,50 @@
+﻿<html>
+  <body>
+    <h1>Add Player</h1>
+    <form method="POST" action="/">
+      <input type="text" name="Name">
+      <input type="submit" value="Add">
+    </form>
+
+    <h1>Players</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>
+             Player Name 
+          </th>
+          <th>
+            Date Of Birth
+          </th>
+        </tr>  
+      </thead>  
+      {% for player in players %}
+        <tr>
+          <td>
+            {{player.name}}
+          </td>
+          <td>
+            {{player.dob}}
+          </td>
+          <td>
+            <form method="GET" action="./more" style="display: inline">
+              <input type="hidden" value="{{player.id}}" name="player_id">
+              <input type="submit" value="more info">
+            </form>
+          </td>
+          <td>
+            <form method="POST" action="./edit" style="display: inline">
+              <input type="submit" value="Update">
+            </form>
+          </td>
+          <td>
+            <form method="POST" action="./delete" style="display: inline">
+              <input type="hidden" value="{{player.name}}" name="name">
+              <input type="submit" value="Delete">
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

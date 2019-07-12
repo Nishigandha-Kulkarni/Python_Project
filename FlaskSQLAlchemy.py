@@ -6,16 +6,12 @@ from flask import redirect
 from flask_sqlalchemy import SQLAlchemy
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
-database_file = "sqlite:///{}".format(os.path.join(project_dir, "playerdatabase.db"))
+database_file = "sqlite:///{}".format(os.path.join(project_dir, "mydb.db"))
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 db = SQLAlchemy(app)
 
 
-class player(db.Model):
-    name = db.Column(db.String(80), unique=True, nullable=False, primary_key=True)
-    def __repr__(self):
-        return "<Name: {}>".format(self.name)
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -24,7 +20,7 @@ def home():
         db.session.add(player)
         db.session.commit()
     players = player.query.all()
-    return render_template("home.html", players=players)
+    return render_template("home.html", players=players[:50])
 
 
 @app.route("/update", methods=["GET", "POST"])
