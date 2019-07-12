@@ -1,0 +1,16 @@
+<html>
+    <body>
+        <h1> Update Player Info : <i>{{player.name}}</i> </h1>
+        <hr>
+    <form action="/update" method="POST">
+        <input type="hidden" value="{{player.id}}" name="player_id">
+        Player Name         : <input type=text value="{{player.name}}" name="player_name"/><br>
+        Player DOB          : <input type=text value="{{player.dob}}" name="player_dob"/><br>
+        Player Height       : <input type=text value="{{player.height}}" name="player_height"/><br>
+        Player Weight       : <input type=text value="{{player.weight}}" name="player_weight"/><br>
+        Player Position     : <input type=text value="{{player.position}}" name="player_position"/><br>
+        Player Place        : <input type=text value="{{player.place}}" name="player_place"/><br>
+        <input type="submit" value="update"/><br>
+    </form>
+    </body>
+</html>

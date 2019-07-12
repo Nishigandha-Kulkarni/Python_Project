@@ -3,9 +3,10 @@ from bs4 import BeautifulSoup as bs
 from string import ascii_lowercase
 import lxml
 import csv
-from sqlalchemy import create_engine,Column,String,Integer
+from model import Players
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
 import re
 
 base_url = "https://www.basketball-reference.com/"
@@ -16,19 +17,22 @@ engine = create_engine('sqlite:///mydb.db', echo=True)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-class Players(Model):
-    __tablename__="players"
-    id=Column(Integer,primary_key=True,autoincrement=True)
-    name=Column(String)
-    image_link=Column(String)
-    height=Column(Integer)
-    weight=Column(Integer)
-    dob=Column(String)
-    place=Column(String)
-    position=Column(String)
+# class Players(Model):
+#     __tablename__="players"
+#     id=Column(Integer,primary_key=True,autoincrement=True)
+#     name=Column(String)
+#     image_link=Column(String)
+#     height=Column(Integer)
+#     weight=Column(Integer)
+#     dob=Column(String)
+#     place=Column(String)
+#     position=Column(String)
 
-    def __repr__(self):
-        return "<Players %s>" % self.name
+#     def __repr__(self):
+#         return "<Players %s>" % self.name
+    
+#     def as_dict(self):
+#        return {c.name: getattr(self, c.name) for c in self.__table__.columns}    
 
 
 Model.metadata.create_all(engine)
@@ -112,8 +116,8 @@ def get_all_nba_players_after_1950():
     # print('Completed.', end='\n\n')
 
 
-# get_all_nba_players_after_1950()
-print(len(session.query(Players).all()))
+get_all_nba_players_after_1950()
+# print(len(session.query(Players).all()))
 
 # print(session.query(Players).all())
 

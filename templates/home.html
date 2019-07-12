@@ -1,12 +1,43 @@
 ﻿<html>
   <body>
-    <h1>Add Player</h1>
+    <h1>Search Player</h1>
     <form method="POST" action="/">
-      <input type="text" name="Name">
-      <input type="submit" value="Add">
+      <input type="hidden" name="name" value="yes">
+      Player Name :
+      <input type="text" name="search">
+      <input type="submit" value="Search">
     </form>
 
-    <h1>Players</h1>
+    
+    <form method="POST" action="/">
+      Player  height gratter then:
+      <input type="hidden" name="height" value="yes">
+      <input type="text" name="search">
+      <input type="submit" value="Search">
+    </form>
+
+    <form method="POST" action="/">
+      Player  weight gratter then:
+      <input type="hidden" name="weight" value="yes">
+      <input type="text" name="search">
+      <input type="submit" value="Search">
+    </form>
+
+     
+
+    <h1>Players Info</h1>
+    <form action="./csv" method="POST">
+      <input type="hidden" name="search_term" value="{{search_term}}"/>
+      <input type="hidden" name="search_value" value="{{search_value}}"/>
+      
+      <input type="submit" value="Download csv"/>
+    </form>
+    <form action="./json" method="POST">
+      <input type="hidden" name="search_term" value="{{search_term}}"/>
+      <input type="hidden" name="search_value" value="{{search_value}}"/>
+      <input type="submit" value="Download json"/>
+    </form>
+
     <table>
       <thead>
         <tr>
@@ -33,13 +64,14 @@
             </form>
           </td>
           <td>
-            <form method="POST" action="./edit" style="display: inline">
+            <form method="GET" action="./update" style="display: inline">
+              <input type="hidden" value="{{player.id}}" name="player_id">
               <input type="submit" value="Update">
             </form>
           </td>
           <td>
             <form method="POST" action="./delete" style="display: inline">
-              <input type="hidden" value="{{player.name}}" name="name">
+              <input type="hidden" value="{{player.id}}" name="player_id">
               <input type="submit" value="Delete">
             </form>
           </td>
